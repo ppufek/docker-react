@@ -18,6 +18,6 @@ deploy:
   bucket_path: "docker-react" # same as app name
   on:
     branch: master # only attempt to deploy an app when master branch gets the new code
-  accesss_key_id: "$AWS_ACCESS_KEY"
+  accesss_key_id: $AWS_ACCESS_KEY
   secret_access_key:
     secure: "$AWS_SECRET_KEY"
