@@ -8,3 +8,16 @@ before_install:
 
 script: 
   - docker run -e CI=true paulapufek/docker-react npm run test
+
+deploy:
+  provider: elasticbeanstalk # telling Travis CI: hey, use this set of instructions to attempt to automatically deploy our app
+  region: "us-east-2" # area of the work --> read from URL: DockerReact-env.23y96p4ucm.us-east-2.elasticbeanstalk.com
+  app: "docker-react"
+  env: "DockerReact-env" # from AWS
+  bucket_name: "elasticbeanstalk-us-east-2-594548673412" # name of the bucket that Travis CI is going to put our zip file into
+  bucket_path: "docker-react" # same as app name
+  on:
+    branch: master # only attempt to deploy an app when master branch gets the new code
+  accesss_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
