@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    build: 
+      context: . #context --> specifying where we want all our files&folders for this image to be pulled from, 
+                 # we want to pull it from the current working directory & to indicate that, we use . 
+                 # otherwise, e.g. context: reactproject(nameOfTheFolder)
+      dockerfile: Dockerfile.dev # use this file to build the image
+    ports: 
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+  tests: #2nd container that is responsible for running our test & rerunning anytime a Volume changes
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"]

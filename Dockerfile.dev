@@ -1,0 +1,11 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+# command which takes public, src directory & everything else inside of frontend directory and copies them over into our working directory --> /app 
+COPY . . 
+
+CMD ["npm", "run", "start"]
